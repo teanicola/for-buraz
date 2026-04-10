@@ -6,6 +6,8 @@
   <title>FOR BURAZ — A Feature Film by Sabina Vajraca</title>
   <meta name="description" content="A Neo-Noir Crime Drama set in the Bosnian immigrant community in Tampa Bay, Florida. Starring Emile Hirsch. Written and directed by Sabina Vajraca.">
 
+  <link rel="preload" href="assets/fonts/Morrison-Regular.otf" as="font" type="font/opentype" crossorigin>
+
   <style>
     /* ============================================
        FONTS
@@ -122,6 +124,14 @@
       margin-bottom: 1.25rem;
     }
 
+    .story p,
+    .container > p,
+    .team-member p,
+    .guild-callout p,
+    .projections-note {
+      max-width: 65ch;
+    }
+
     .section-label {
       font-size: 0.65rem;
       letter-spacing: 0.4em;
@@ -157,7 +167,7 @@
 
     .florida-break img {
       height: 140px;
-      opacity: 0.07;
+      opacity: 0.11;
     }
 
     /* ============================================
@@ -184,6 +194,12 @@
         radial-gradient(ellipse at 75% 35%, rgba(27, 35, 64, 0.25) 0%, transparent 55%),
         radial-gradient(ellipse at 50% 80%, rgba(0, 107, 63, 0.08) 0%, transparent 40%);
       pointer-events: none;
+      animation: hero-glow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes hero-glow {
+      0% { opacity: 0.85; }
+      100% { opacity: 1; }
     }
 
     .hero-florida {
@@ -194,6 +210,12 @@
       max-width: 550px;
       opacity: 0.05;
       pointer-events: none;
+      animation: florida-drift 20s ease-in-out infinite;
+    }
+
+    @keyframes florida-drift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-8px, -12px) scale(1.02); }
     }
 
     .hero-tagline {
@@ -255,12 +277,13 @@
       width: 1px;
       height: 40px;
       background: var(--muted-gray);
-      animation: pulse 2.5s ease-in-out infinite;
+      animation: scroll-line 2.5s ease-in-out infinite;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.2; }
-      50% { opacity: 0.8; }
+    @keyframes scroll-line {
+      0% { transform: scaleY(0); transform-origin: top; opacity: 0.3; }
+      50% { transform: scaleY(1); transform-origin: top; opacity: 0.8; }
+      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0.3; }
     }
 
     /* ============================================
@@ -297,11 +320,24 @@
        4. DIRECTOR STATEMENT
        ============================================ */
     .director-quote {
-      border-left: 2px solid var(--warm-amber);
       padding: 3rem 2rem 3rem 3rem;
       margin: 0 auto;
       max-width: 960px;
       background: linear-gradient(165deg, rgba(27, 35, 64, 0.2) 0%, transparent 50%);
+      position: relative;
+    }
+
+    .director-quote::before {
+      content: '\201C';
+      font-family: 'Morrison', Georgia, serif;
+      font-size: 8rem;
+      line-height: 1;
+      color: var(--warm-amber);
+      opacity: 0.15;
+      position: absolute;
+      top: -0.5rem;
+      left: 0.5rem;
+      pointer-events: none;
     }
 
     .director-quote blockquote {
@@ -410,6 +446,7 @@
       object-fit: cover;
       position: absolute;
       inset: 0;
+      filter: sepia(0.2) saturate(0.8) brightness(0.85) contrast(1.05);
     }
 
     .cast-info {
@@ -506,9 +543,26 @@
        ============================================ */
     .comps-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
       gap: 1.5rem;
       margin-top: 2rem;
+    }
+
+    .comp-card-featured {
+      grid-row: 1 / 3;
+      padding: 2.5rem;
+      border-color: var(--border-hover);
+      background: linear-gradient(165deg, rgba(198, 142, 23, 0.06) 0%, var(--venetian-shadow) 60%);
+    }
+
+    .comp-card-featured .comp-title {
+      font-size: 1.6rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .comp-card-featured .comp-stat-value.highlight {
+      font-size: 1.4rem;
     }
 
     .comp-card {
@@ -597,6 +651,10 @@
       color: var(--muted-gray);
     }
 
+    .stat-hero .stat-number {
+      font-size: clamp(3rem, 6vw, 4.5rem);
+    }
+
     .guild-callout {
       margin-top: 2rem;
       padding: 2rem;
@@ -662,6 +720,19 @@
       color: var(--dusty-cream);
     }
 
+    .projections-table thead th:last-child {
+      color: var(--dusty-cream);
+      background: rgba(198, 142, 23, 0.08);
+    }
+
+    .projections-table tbody td:last-child {
+      background: rgba(198, 142, 23, 0.04);
+    }
+
+    .projections-table tbody tr.highlight-row td:last-child {
+      background: rgba(198, 142, 23, 0.1);
+    }
+
     .projections-note {
       margin-top: 1.25rem;
       font-size: 0.85rem;
@@ -707,7 +778,7 @@
     .financing-total {
       grid-column: 1 / -1;
       text-align: center;
-      padding: 2rem;
+      padding: 3rem 2rem;
       border: 1px solid var(--border-hover);
       background: rgba(198, 142, 23, 0.04);
     }
@@ -721,8 +792,9 @@
     }
 
     .financing-total .financing-amount {
-      font-size: 2rem;
+      font-size: 2.8rem;
       margin-bottom: 0;
+      letter-spacing: 0.03em;
     }
 
     /* ============================================
@@ -758,6 +830,7 @@
       flex-wrap: wrap;
       gap: 0.75rem;
       margin-top: 2rem;
+      justify-content: center;
     }
 
     .accolade {
@@ -929,6 +1002,38 @@
         align-items: center;
       }
     }
+    /* ============================================
+       SCROLL REVEAL ANIMATIONS
+       ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-stagger > .reveal:nth-child(1) { transition-delay: 0s; }
+    .reveal-stagger > .reveal:nth-child(2) { transition-delay: 0.12s; }
+    .reveal-stagger > .reveal:nth-child(3) { transition-delay: 0.24s; }
+    .reveal-stagger > .reveal:nth-child(4) { transition-delay: 0.36s; }
+    .reveal-stagger > .reveal:nth-child(5) { transition-delay: 0.48s; }
+
+    /* ============================================
+       REDUCED MOTION
+       ============================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -946,7 +1051,7 @@
   <!-- ========== 2. THE HOOK ========== -->
   <section class="hook" id="hook">
     <div class="container">
-      <p class="hook-text">
+      <p class="hook-text reveal">
         There are 4 million Bosnians living in diaspora — the second largest diaspora relative to homeland population in the world. They are still connected to the old world, but living in the new. Their hearts have never left.<br><br>
         <em>There has never been a major feature film that told their story. Until now.</em>
       </p>
@@ -958,8 +1063,8 @@
   <!-- ========== 3. THE STORY ========== -->
   <section class="story">
     <div class="container">
-      <span class="section-label">The Story</span>
-      <h2>Identity. Guilt. Belonging. The dark side of the American Dream.</h2>
+      <span class="section-label reveal">The Story</span>
+      <h2 class="reveal">Identity. Guilt. Belonging. The dark side of the American Dream.</h2>
       <p>
         Living in a Tribeca loft, with a high-paid job on Wall Street, and a perfect American girlfriend by his side, Kenan's life couldn't be further away from where he started — a bad part of a small town in Florida, where he and his family landed two decades before as Bosnian War refugees.
       </p>
@@ -976,7 +1081,7 @@
   </section>
 
   <!-- ========== 4. DIRECTOR'S STATEMENT ========== -->
-  <div class="director-quote">
+  <div class="director-quote reveal">
     <blockquote>
       <p>
         "In FOR BURAZ it is my brother Tarik's sudden passing in 2010 that's a jumping point into a part of immigrant experience rarely explored — that of a child refugee chasing the American Dream. Set in the same Florida Bosnian refugee community my family landed in, this is a story of identity, the deep desire to belong (and yet feeling out of place everywhere), the gray zone in which good and bad reside, and guilt — themes that have haunted me most of my life, and all of my artistic career.
@@ -995,7 +1100,7 @@
   <!-- ========== 5. SIZZLE REEL ========== -->
   <section class="sizzle">
     <div class="container">
-      <span class="section-label">Sizzle Reel</span>
+      <span class="section-label reveal">Sizzle Reel</span>
       <div class="sizzle-wrapper">
         <iframe
           src="https://player.vimeo.com/video/1173402665?h=a9c0bfa95e&title=0&byline=0&portrait=0"
@@ -1013,13 +1118,13 @@
   <!-- ========== 6. CAST ========== -->
   <section>
     <div class="container">
-      <span class="section-label">Attached Cast</span>
-      <h2>The Ensemble</h2>
+      <span class="section-label reveal">Attached Cast</span>
+      <h2 class="reveal">The Ensemble</h2>
       <p>The cast combines US name recognition with authentic Balkan talent that will galvanize the diaspora audience — driving organic community screenings and word-of-mouth that no marketing budget can replicate.</p>
 
-      <div class="cast-grid">
+      <div class="cast-grid reveal-stagger">
         <!-- Emile Hirsch -->
-        <div class="cast-card">
+        <div class="cast-card reveal">
           <div class="cast-photo"><img src="assets/images/cast/emile-hirsch.jpg" alt="Emile Hirsch"></div>
           <div class="cast-info">
             <p class="cast-name"><a href="https://www.imdb.com/name/nm0386472/" target="_blank" rel="noopener">Emile Hirsch</a></p>
@@ -1028,7 +1133,7 @@
           </div>
         </div>
         <!-- Julian Maroun -->
-        <div class="cast-card">
+        <div class="cast-card reveal">
           <div class="cast-photo"><img src="assets/images/cast/julian-maroun.jpg" alt="Julian Maroun"></div>
           <div class="cast-info">
             <p class="cast-name"><a href="https://www.imdb.com/name/nm6940456/" target="_blank" rel="noopener">Julian Maroun</a></p>
@@ -1037,7 +1142,7 @@
           </div>
         </div>
         <!-- Alma Prica -->
-        <div class="cast-card">
+        <div class="cast-card reveal">
           <div class="cast-photo"><img src="assets/images/cast/alma-prica.jpg" alt="Alma Prica"></div>
           <div class="cast-info">
             <p class="cast-name"><a href="https://www.imdb.com/name/nm0697340/" target="_blank" rel="noopener">Alma Prica</a></p>
@@ -1046,7 +1151,7 @@
           </div>
         </div>
         <!-- Faketa Salihbegovic -->
-        <div class="cast-card">
+        <div class="cast-card reveal">
           <div class="cast-photo"><img src="assets/images/cast/faketa-salihbegovic.jpg" alt="Faketa Salihbegovic"></div>
           <div class="cast-info">
             <p class="cast-name"><a href="https://www.imdb.com/name/nm3917599/" target="_blank" rel="noopener">Faketa Salihbegovic</a></p>
@@ -1055,7 +1160,7 @@
           </div>
         </div>
         <!-- Flora Diaz -->
-        <div class="cast-card">
+        <div class="cast-card reveal">
           <div class="cast-photo"><img src="assets/images/cast/flora-diaz.jpg" alt="Flora Diaz"></div>
           <div class="cast-info">
             <p class="cast-name"><a href="https://www.imdb.com/name/nm1033193/" target="_blank" rel="noopener">Flora Diaz</a></p>
@@ -1084,13 +1189,13 @@
   <!-- ========== 8. COMPARABLE FILMS ========== -->
   <section>
     <div class="container">
-      <span class="section-label">Proven Comparables</span>
-      <h2>Culturally specific stories that broke through</h2>
+      <span class="section-label reveal">Proven Comparables</span>
+      <h2 class="reveal">Culturally specific stories that broke through</h2>
       <p>Intimate stories rooted in specific immigrant experiences have achieved both critical acclaim and commercial success. These films share FOR BURAZ's profile: low budgets, diaspora audiences, festival launches, massive returns.</p>
 
-      <div class="comps-grid">
+      <div class="comps-grid reveal-stagger">
         <!-- Anora -->
-        <div class="comp-card">
+        <div class="comp-card comp-card-featured reveal">
           <p class="comp-title">Anora</p>
           <p class="comp-meta">2024 &middot; Dir. Sean Baker &middot; Palme d'Or, Best Picture Oscar</p>
           <div class="comp-stat">
@@ -1112,7 +1217,7 @@
         </div>
 
         <!-- Minari -->
-        <div class="comp-card">
+        <div class="comp-card reveal">
           <p class="comp-title">Minari</p>
           <p class="comp-meta">2020 &middot; Dir. Lee Isaac Chung &middot; Sundance Grand Jury Prize, Oscar (Supporting Actress)</p>
           <div class="comp-stat">
@@ -1134,7 +1239,7 @@
         </div>
 
         <!-- The Farewell -->
-        <div class="comp-card">
+        <div class="comp-card reveal">
           <p class="comp-title">The Farewell</p>
           <p class="comp-meta">2019 &middot; Dir. Lulu Wang &middot; Golden Globe (Best Actress)</p>
           <div class="comp-stat">
@@ -1164,19 +1269,19 @@
   <!-- ========== 9. THE OPPORTUNITY ========== -->
   <section>
     <div class="container">
-      <span class="section-label">The Opportunity</span>
-      <h2>A built-in global audience Hollywood has never served</h2>
+      <span class="section-label reveal">The Opportunity</span>
+      <h2 class="reveal">A built-in global audience Hollywood has never served</h2>
 
-      <div class="stats-row">
-        <div class="stat">
+      <div class="stats-row reveal-stagger">
+        <div class="stat stat-hero reveal">
           <p class="stat-number">4M</p>
           <p class="stat-label">Bosnians in Diaspora</p>
         </div>
-        <div class="stat">
+        <div class="stat reveal">
           <p class="stat-number">2nd</p>
           <p class="stat-label">Largest Diaspora (Relative)</p>
         </div>
-        <div class="stat">
+        <div class="stat reveal">
           <p class="stat-number">20–30%</p>
           <p class="stat-label">Of Intl. Revenue from Diaspora</p>
         </div>
@@ -1190,7 +1295,7 @@
       </p>
 
       <!-- Guild callout -->
-      <div class="guild-callout">
+      <div class="guild-callout reveal">
         <h3>The For Buraz Guild</h3>
         <p>
           Inspired by the grassroots models that powered Sound of Freedom ($250M worldwide on a $14.5M budget) and The Passion of the Christ ($612M on $30M), FOR BURAZ is building a community-driven funding and distribution engine. The For Buraz Guild will allow diaspora members to invest, advocate, and organize — converting community pride into opening-weekend momentum.
@@ -1202,8 +1307,8 @@
   <!-- ========== 10. REVENUE PROJECTIONS ========== -->
   <section>
     <div class="container">
-      <span class="section-label">Revenue Projections</span>
-      <h2>Three Scenarios, One Structural Advantage</h2>
+      <span class="section-label reveal">Revenue Projections</span>
+      <h2 class="reveal">Three Scenarios, One Structural Advantage</h2>
       <p>Modeled across 13 international territories and 7 revenue channels. All figures represent total worldwide gross revenue.</p>
 
       <table class="projections-table">
@@ -1266,31 +1371,31 @@
   <!-- ========== 11. FINANCING ========== -->
   <section>
     <div class="container">
-      <span class="section-label">Financing Plan</span>
-      <h2>How FOR BURAZ Gets Made</h2>
+      <span class="section-label reveal">Financing Plan</span>
+      <h2 class="reveal">How FOR BURAZ Gets Made</h2>
 
-      <div class="financing-grid">
-        <div class="financing-item">
+      <div class="financing-grid reveal-stagger">
+        <div class="financing-item reveal">
           <h3>Foreign Pre-Sales</h3>
           <p class="financing-amount">$104K – $250K</p>
           <p>Guaranteed floor across Germany/Austria, Scandinavia, Bosnia, AU/NZ. Emile Hirsch provides minimum sales agent floor; Balkan cast adds pre-sale value in diaspora territories.</p>
         </div>
-        <div class="financing-item">
+        <div class="financing-item reveal">
           <h3>Equity Investment</h3>
           <p class="financing-amount">$800K – $1.2M</p>
           <p>Private investors from the Bosnian diaspora business community, impact investors, and entertainment-focused funds.</p>
         </div>
-        <div class="financing-item">
+        <div class="financing-item reveal">
           <h3>Grants &amp; Tax Incentives</h3>
           <p class="financing-amount">$200K – $400K</p>
           <p>Florida film incentive (transferable tax credits), potential co-production structures with Bosnia/Croatia/Australia for additional territorial incentives.</p>
         </div>
-        <div class="financing-item">
+        <div class="financing-item reveal">
           <h3>Community Crowdfunding</h3>
           <p class="financing-amount">For Buraz Guild</p>
           <p>Community-driven funding allowing diaspora members to invest and become advocates — turning funders into the film's marketing engine.</p>
         </div>
-        <div class="financing-total">
+        <div class="financing-total reveal">
           <h3>Total Production Budget</h3>
           <p class="financing-amount">$2M USD</p>
         </div>
@@ -1305,26 +1410,26 @@
   <!-- ========== 12. THE TEAM ========== -->
   <section>
     <div class="container">
-      <span class="section-label">The Team</span>
-      <h2>World-Class Filmmakers</h2>
+      <span class="section-label reveal">The Team</span>
+      <h2 class="reveal">World-Class Filmmakers</h2>
 
-      <div class="team-grid">
-        <div class="team-member">
+      <div class="team-grid reveal-stagger">
+        <div class="team-member reveal">
           <h3>Sabina Vajraca</h3>
           <span class="team-role">Director / Writer</span>
           <p>Born in Bosnia and Herzegovina, Sabina immigrated to the U.S. as a war refugee and started her directing career in NYC theatre. Her feature documentary BACK TO BOSNIA premiered at AFI Fest, screened at 30+ festivals worldwide, and was featured in BBC's "Top 100 Greatest Films Directed by Women." Her short drama SEVAP/MITZVAH was a 2024 Academy Awards contender and won the 2023 Humanitas Prize. Her accolades include the DGA SFA Grand Prize, Alfred P. Sloan grant, and nominations for the Student Oscar and Student BAFTA. She is a member of Film Fatales and BAFTA, an alumna of Ryan Murphy's Half Directing Mentorship and Stowe Story Labs, and holds an M.F.A. from USC School of Cinematic Arts.</p>
         </div>
-        <div class="team-member">
+        <div class="team-member reveal">
           <h3>Diane Houslin</h3>
           <span class="team-role">Producer</span>
           <p>Diane's credits include ESPN documentaries THROUGH THE FIRE and LAY IT ON THE LINE; short film MORNING BREATH (Sundance Special Jury Prize); Apple+ limited series THE LAST DAYS OF PTOLEMY GRAY starring Samuel L. Jackson; Sundance-supported feature YELLING TO THE SKY starring Zoe Kravitz; and Disney/Hulu feature THE MAN IN MY BASEMENT starring Corey Hawkins and Willem Dafoe (2025 TIFF Premiere, 2026 BAFTA Nominee). She is an inaugural class fellow of the Sundance Institute Creative Producers Lab.</p>
         </div>
-        <div class="team-member">
+        <div class="team-member reveal">
           <h3>Paul Miller</h3>
           <span class="team-role">Executive Producer</span>
           <p>Paul has produced and financed films globally, running film funds in both the U.S. and the Middle East. His films have premiered at Cannes, Berlin, Venice, Sundance, and Toronto, and include David Gordon Green's SNOW ANGELS, PROZAC NATION, the Oscar-nominated LONE STAR, and SCALES (Venice Film Festival Verona Award, Saudi Oscar submission). He is a member of the DGA, PGA, ACE Producers, and the European Film Academy.</p>
         </div>
-        <div class="team-member">
+        <div class="team-member reveal">
           <h3>Tea Nicola</h3>
           <span class="team-role">Executive Producer</span>
           <p>Tea immigrated to Canada as a Bosnian War refugee and was raised by a single mom. She founded WealthBar Financial Services, Canada's first exclusively online wealth manager, and served as CEO for a decade before selling to CI Financial Services in 2019. She has been recognized as "Business in Vancouver Top 40 under 40," "Most Influential Women in Business," and "Top 500 BC Business Leaders of All Time." She was involved in the Oscar campaign for SEVAP/MITZVAH.</p>
@@ -1338,8 +1443,8 @@
   <!-- ========== 13. ACCOLADES / WHY NOW ========== -->
   <section>
     <div class="container">
-      <span class="section-label">Why This Film. Why Now.</span>
-      <h2>The immigrant experience is the defining story of our time.</h2>
+      <span class="section-label reveal">Why This Film. Why Now.</span>
+      <h2 class="reveal">The immigrant experience is the defining story of our time.</h2>
       <p>
         From Sundance breakouts to Oscar winners, audiences and the industry have demonstrated an insatiable appetite for authentic, culturally specific stories told by filmmakers from within those communities. Films like Anora, Minari, The Farewell, and A Separation have proven that intimate stories rooted in specific immigrant experiences can achieve both critical acclaim and commercial success.
       </p>
@@ -1350,14 +1455,14 @@
         With Emile Hirsch attached, a world-class producing team, and the backing of a 4-million-strong global diaspora, FOR BURAZ is positioned to be one of the most compelling independent films of its release year — and a landmark moment for a community that has been waiting decades to see its story told on screen.
       </p>
 
-      <div class="accolades">
-        <span class="accolade">FEST Pitching Forum Winner (2021)</span>
-        <span class="accolade">Tangerine Fellowship, Stowe Story Labs (2019)</span>
-        <span class="accolade">Top 100, Capital Funds Screenplay Competition (2022)</span>
-        <span class="accolade">Austin Film Festival Second Rounder (2018)</span>
-        <span class="accolade">Nantucket Screenwriters Colony (2019)</span>
-        <span class="accolade">Lynn Shelton's Of a Certain Age Grant Finalist (2021)</span>
-        <span class="accolade">LANDO Grant Finalist (2024)</span>
+      <div class="accolades reveal-stagger">
+        <span class="accolade reveal">FEST Pitching Forum Winner (2021)</span>
+        <span class="accolade reveal">Tangerine Fellowship, Stowe Story Labs (2019)</span>
+        <span class="accolade reveal">Top 100, Capital Funds Screenplay Competition (2022)</span>
+        <span class="accolade reveal">Austin Film Festival Second Rounder (2018)</span>
+        <span class="accolade reveal">Nantucket Screenwriters Colony (2019)</span>
+        <span class="accolade reveal">Lynn Shelton's Of a Certain Age Grant Finalist (2021)</span>
+        <span class="accolade reveal">LANDO Grant Finalist (2024)</span>
       </div>
     </div>
   </section>
@@ -1365,7 +1470,7 @@
   <!-- ========== 14. CTA ========== -->
   <section class="cta">
     <div class="container">
-      <h2>Be Part of the Story</h2>
+      <h2 class="reveal">Be Part of the Story</h2>
       <p>FOR BURAZ is assembling its financing now. We're looking for investors who believe in the power of untold stories and underserved audiences.</p>
 
       <div class="cta-buttons">
@@ -1384,6 +1489,24 @@
   <footer>
     <p>Confidential &middot; For Buraz &middot; 2026</p>
   </footer>
+
+  <script>
+    (function() {
+      var reveals = document.querySelectorAll('.reveal');
+      if (!reveals.length) return;
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+      reveals.forEach(function(el) { observer.observe(el); });
+    })();
+  </script>
 
 </body>
 </html>
