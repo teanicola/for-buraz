@@ -1,0 +1,20 @@
+# OS files
+.DS_Store
+Thumbs.db
+__MACOSX/
+
+# Node / Playwright (QA tooling only)
+site/node_modules/
+site/package.json
+site/package-lock.json
+site/screenshot.js
+site/screenshots/
+
+# Claude Code
+.claude/
+
+# Large files not needed on Pages
+lookbook.pdf
+
+# Source archives
+*.zip

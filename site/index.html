@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FOR BURAZ — A Feature Film by Sabina Vajraca</title>
+  <meta name="description" content="A Neo-Noir Crime Drama set in the Bosnian immigrant community in Tampa Bay, Florida. Starring Emile Hirsch. Written and directed by Sabina Vajraca.">
+
+  <style>
+    /* ============================================
+       FONTS
+       ============================================ */
+    @font-face {
+      font-family: 'Morrison';
+      src: url('assets/fonts/Morrison-Regular.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ============================================
+       DESIGN TOKENS (from styleguide.md)
+       ============================================ */
+    :root {
+      /* Noir Foundation */
+      --deep-black: #1A1008;
+      --venetian-shadow: #2C2418;
+      --warm-amber: #C68E17;
+      --sun-gold: #D4A843;
+      --dusty-cream: #E8D5A3;
+
+      /* Cultural Accent */
+      --quran-green: #006B3F;
+      --deep-green: #1B5E20;
+
+      /* Supporting */
+      --maroon: #6B1C2A;
+      --navy: #1B2340;
+      --muted-gray: #8A8A8A;
+      --deep-sepia: #704214;
+
+      /* Functional */
+      --text-primary: rgba(232, 213, 163, 0.92);
+      --text-secondary: rgba(232, 213, 163, 0.65);
+      --border-subtle: rgba(232, 213, 163, 0.08);
+      --border-hover: rgba(198, 142, 23, 0.3);
+    }
+
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Avenir', 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: var(--deep-black);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: var(--warm-amber);
+      text-decoration: none;
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    a:hover {
+      color: var(--sun-gold);
+    }
+
+    /* ============================================
+       LAYOUT
+       ============================================ */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 6rem 0;
+    }
+
+    /* ============================================
+       TYPOGRAPHY
+       ============================================ */
+    h1, h2, h3 {
+      font-family: 'Morrison', Georgia, 'Times New Roman', serif;
+      font-weight: normal;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.2;
+      color: var(--dusty-cream);
+      margin-bottom: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      color: var(--dusty-cream);
+      margin-bottom: 0.25rem;
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--warm-amber);
+      margin-bottom: 2rem;
+      display: block;
+    }
+
+    /* ============================================
+       DIVIDERS
+       ============================================ */
+    .divider {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .divider hr {
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(112, 66, 20, 0.3), transparent);
+    }
+
+    .florida-break {
+      width: 100%;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .florida-break img {
+      height: 140px;
+      opacity: 0.07;
+    }
+
+    /* ============================================
+       1. HERO
+       ============================================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 25% 65%, rgba(107, 28, 42, 0.2) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 35%, rgba(27, 35, 64, 0.25) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 80%, rgba(0, 107, 63, 0.08) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .hero-florida {
+      position: absolute;
+      right: -5%;
+      bottom: -10%;
+      width: 50%;
+      max-width: 550px;
+      opacity: 0.05;
+      pointer-events: none;
+    }
+
+    .hero-tagline {
+      font-style: italic;
+      color: var(--sun-gold);
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .hero-title {
+      font-size: clamp(4rem, 12vw, 9rem);
+      letter-spacing: 0.08em;
+      line-height: 0.9;
+      color: var(--dusty-cream);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .hero-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--warm-amber);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .hero-subtitle {
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted-gray);
+      max-width: 600px;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted-gray);
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: var(--muted-gray);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.8; }
+    }
+
+    /* ============================================
+       2. HOOK (Logline)
+       ============================================ */
+    .hook {
+      text-align: center;
+      padding: 8rem 0;
+    }
+
+    .hook-text {
+      font-family: 'Morrison', Georgia, 'Times New Roman', serif;
+      font-size: clamp(1.3rem, 3vw, 1.9rem);
+      font-weight: normal;
+      line-height: 1.7;
+      color: var(--dusty-cream);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .hook-text em {
+      color: var(--warm-amber);
+    }
+
+    /* ============================================
+       3. STORY
+       ============================================ */
+    .story p {
+      font-size: 1.1rem;
+      line-height: 1.85;
+    }
+
+    /* ============================================
+       4. DIRECTOR STATEMENT
+       ============================================ */
+    .director-quote {
+      border-left: 2px solid var(--warm-amber);
+      padding: 3rem 2rem 3rem 3rem;
+      margin: 0 auto;
+      max-width: 960px;
+      background: linear-gradient(165deg, rgba(27, 35, 64, 0.2) 0%, transparent 50%);
+    }
+
+    .director-quote blockquote {
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--text-primary);
+    }
+
+    .director-quote blockquote p:last-child {
+      margin-bottom: 0;
+    }
+
+    .director-quote cite {
+      display: block;
+      margin-top: 1.5rem;
+      font-style: normal;
+      color: var(--warm-amber);
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+    }
+
+    /* ============================================
+       5. SIZZLE REEL
+       ============================================ */
+    .sizzle {
+      padding: 4rem 0;
+    }
+
+    .sizzle-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      overflow: hidden;
+      border: 1px solid rgba(112, 66, 20, 0.2);
+    }
+
+    .sizzle-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .sizzle-caption {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted-gray);
+    }
+
+    /* ============================================
+       6. CAST
+       ============================================ */
+    .cast-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .cast-card {
+      background: var(--venetian-shadow);
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .cast-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .cast-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      background: linear-gradient(145deg, rgba(27, 35, 64, 0.4), var(--venetian-shadow));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cast-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, var(--venetian-shadow) 100%);
+    }
+
+    .cast-initials {
+      font-family: 'Morrison', Georgia, serif;
+      font-size: 3rem;
+      color: rgba(232, 213, 163, 0.08);
+      letter-spacing: 0.1em;
+    }
+
+    .cast-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+
+    .cast-info {
+      padding: 1.5rem;
+    }
+
+    .cast-name {
+      font-family: 'Morrison', Georgia, serif;
+      font-size: 1.25rem;
+      color: var(--dusty-cream);
+      margin-bottom: 0.25rem;
+    }
+
+    .cast-name a {
+      color: var(--dusty-cream);
+      border-bottom: 1px solid transparent;
+    }
+
+    .cast-name a:hover {
+      color: var(--warm-amber);
+      border-bottom-color: var(--warm-amber);
+    }
+
+    .cast-role {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--warm-amber);
+      margin-bottom: 0.75rem;
+    }
+
+    .cast-credits {
+      font-size: 0.85rem;
+      color: var(--muted-gray);
+      font-style: italic;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    .cast-note {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* ============================================
+       7. CINEMATOGRAPHER
+       ============================================ */
+    .cinematographer {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem;
+      background: var(--venetian-shadow);
+      border: 1px solid var(--border-subtle);
+      margin-top: 3rem;
+    }
+
+    .cinematographer-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, rgba(27, 35, 64, 0.4), var(--venetian-shadow));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .cinematographer-icon span {
+      font-family: 'Morrison', Georgia, serif;
+      font-size: 1.5rem;
+      color: rgba(232, 213, 163, 0.15);
+    }
+
+    .cinematographer-info h3 {
+      margin-bottom: 0.15rem;
+    }
+
+    .cinematographer-info .cast-role {
+      margin-bottom: 0.5rem;
+    }
+
+    .cinematographer-info p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       8. COMPARABLE FILMS
+       ============================================ */
+    .comps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .comp-card {
+      background: var(--venetian-shadow);
+      border: 1px solid var(--border-subtle);
+      padding: 2rem;
+    }
+
+    .comp-title {
+      font-family: 'Morrison', Georgia, serif;
+      font-size: 1.3rem;
+      color: var(--dusty-cream);
+      margin-bottom: 0.15rem;
+    }
+
+    .comp-meta {
+      font-size: 0.75rem;
+      color: var(--muted-gray);
+      margin-bottom: 1.25rem;
+    }
+
+    .comp-stat {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(112, 66, 20, 0.12);
+      font-size: 0.9rem;
+    }
+
+    .comp-stat:last-child {
+      border-bottom: none;
+    }
+
+    .comp-stat-label {
+      color: var(--muted-gray);
+    }
+
+    .comp-stat-value {
+      color: var(--warm-amber);
+      font-weight: 600;
+    }
+
+    .comp-stat-value.highlight {
+      font-family: 'Morrison', Georgia, serif;
+      font-size: 1.1rem;
+    }
+
+    .comps-source {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: rgba(138, 138, 138, 0.5);
+      font-style: italic;
+    }
+
+    /* ============================================
+       9. OPPORTUNITY
+       ============================================ */
+    .stats-row {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 3rem 0;
+    }
+
+    .stat {
+      flex: 1;
+      min-width: 160px;
+      text-align: center;
+      padding: 2rem 1rem;
+      background: var(--venetian-shadow);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .stat-number {
+      font-family: 'Morrison', Georgia, serif;
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      color: var(--warm-amber);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted-gray);
+    }
+
+    .guild-callout {
+      margin-top: 2rem;
+      padding: 2rem;
+      border: 1px solid rgba(0, 107, 63, 0.25);
+      background: rgba(0, 107, 63, 0.06);
+    }
+
+    .guild-callout h3 {
+      color: var(--quran-green);
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .guild-callout p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 0;
+    }
+
+    /* ============================================
+       10. REVENUE PROJECTIONS
+       ============================================ */
+    .projections-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .projections-table thead th {
+      font-family: 'Morrison', Georgia, serif;
+      font-weight: normal;
+      font-size: 1rem;
+      color: var(--warm-amber);
+      padding: 1rem 0.75rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(112, 66, 20, 0.25);
+    }
+
+    .projections-table thead th:first-child {
+      text-align: left;
+    }
+
+    .projections-table tbody td {
+      padding: 0.75rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(112, 66, 20, 0.08);
+      color: var(--text-primary);
+    }
+
+    .projections-table tbody td:first-child {
+      text-align: left;
+      color: var(--muted-gray);
+      font-size: 0.85rem;
+    }
+
+    .projections-table tbody tr.highlight-row td {
+      color: var(--warm-amber);
+      font-weight: 600;
+    }
+
+    .projections-table tbody tr.highlight-row td:first-child {
+      color: var(--dusty-cream);
+    }
+
+    .projections-note {
+      margin-top: 1.25rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ============================================
+       11. FINANCING
+       ============================================ */
+    .financing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .financing-item {
+      padding: 1.5rem;
+      background: var(--venetian-shadow);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .financing-item h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .financing-amount {
+      font-family: 'Morrison', Georgia, serif;
+      font-size: 1.3rem;
+      color: var(--warm-amber);
+      margin-bottom: 0.5rem;
+    }
+
+    .financing-item p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    .financing-total {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 2rem;
+      border: 1px solid var(--border-hover);
+      background: rgba(198, 142, 23, 0.04);
+    }
+
+    .financing-total h3 {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted-gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .financing-total .financing-amount {
+      font-size: 2rem;
+      margin-bottom: 0;
+    }
+
+    /* ============================================
+       12. TEAM
+       ============================================ */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .team-member .team-role {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--warm-amber);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .team-member p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    /* ============================================
+       13. ACCOLADES
+       ============================================ */
+    .accolades {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .accolade {
+      background: rgba(198, 142, 23, 0.08);
+      border: 1px solid rgba(198, 142, 23, 0.2);
+      padding: 0.5rem 1.1rem;
+      font-size: 0.8rem;
+      color: var(--warm-amber);
+      letter-spacing: 0.03em;
+    }
+
+    /* ============================================
+       14. CTA
+       ============================================ */
+    .cta {
+      text-align: center;
+      padding: 6rem 0;
+    }
+
+    .cta h2 {
+      margin-bottom: 1rem;
+    }
+
+    .cta p {
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-family: 'Avenir', 'Avenir Next', sans-serif;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--quran-green);
+      color: var(--dusty-cream);
+      border: 1px solid var(--quran-green);
+    }
+
+    .btn-primary:hover {
+      background: var(--deep-green);
+      color: var(--dusty-cream);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--warm-amber);
+      border: 1px solid var(--warm-amber);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(198, 142, 23, 0.08);
+      color: var(--sun-gold);
+      transform: translateY(-1px);
+    }
+
+    .cta-contact {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(112, 66, 20, 0.15);
+    }
+
+    .cta-contact p {
+      font-size: 0.95rem;
+    }
+
+    .cta-contact a {
+      border-bottom: 1px solid rgba(198, 142, 23, 0.3);
+    }
+
+    .cta-contact a:hover {
+      border-bottom-color: var(--warm-amber);
+    }
+
+    /* ============================================
+       15. FOOTER
+       ============================================ */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(138, 138, 138, 0.35);
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 900px) {
+      .comps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .financing-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      section {
+        padding: 4rem 0;
+      }
+
+      .container {
+        padding: 0 1.5rem;
+      }
+
+      .hook {
+        padding: 5rem 0;
+      }
+
+      .cast-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .cast-photo {
+        aspect-ratio: 1 / 1;
+      }
+
+      .cast-info {
+        padding: 1rem;
+      }
+
+      .director-quote {
+        padding: 2rem 1.5rem 2rem 2rem;
+      }
+
+      .stats-row {
+        gap: 1rem;
+      }
+
+      .cinematographer {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .projections-table {
+        font-size: 0.8rem;
+      }
+
+      .projections-table thead th,
+      .projections-table tbody td {
+        padding: 0.5rem 0.4rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== 1. HERO ========== -->
+  <header class="hero">
+    <img src="assets/images/florida-white.png" alt="" class="hero-florida" aria-hidden="true">
+    <p class="hero-tagline">For Family. For Truth.</p>
+    <h1 class="hero-title">FOR BURAZ</h1>
+    <p class="hero-label">A Feature Film by Sabina Vajraca</p>
+    <p class="hero-subtitle">Neo-Noir Crime Drama Set in the Bosnian Community in Tampa Bay, Florida</p>
+    <a href="#hook" class="hero-scroll" aria-label="Scroll down">scroll</a>
+  </header>
+
+  <!-- ========== 2. THE HOOK ========== -->
+  <section class="hook" id="hook">
+    <div class="container">
+      <p class="hook-text">
+        There are 4 million Bosnians living in diaspora — the second largest diaspora relative to homeland population in the world. They are still connected to the old world, but living in the new. Their hearts have never left.<br><br>
+        <em>There has never been a major feature film that told their story. Until now.</em>
+      </p>
+    </div>
+  </section>
+
+  <div class="divider"><hr></div>
+
+  <!-- ========== 3. THE STORY ========== -->
+  <section class="story">
+    <div class="container">
+      <span class="section-label">The Story</span>
+      <h2>Identity. Guilt. Belonging. The dark side of the American Dream.</h2>
+      <p>
+        Living in a Tribeca loft, with a high-paid job on Wall Street, and a perfect American girlfriend by his side, Kenan's life couldn't be further away from where he started — a bad part of a small town in Florida, where he and his family landed two decades before as Bosnian War refugees.
+      </p>
+      <p>
+        So when he gets a call that his younger brother Armin died of an accidental drug overdose while visiting their mother Indira in that same neighborhood he ostracized himself from, Kenan's plan is to go there, bury his brother, take care of his mother, and get back to NYC as quickly as possible.
+      </p>
+      <p>
+        That all changes at the funeral, when Mirso, Armin's childhood friend turned reformed criminal, tells Kenan it was no accident — Armin was killed — and Kenan is forced into the dark underbelly of the Bosnian immigrant community with all its various characters, including Bojan, a trigger-happy gang leader, and Lea, a femme-fatale-esque girl Armin was seeing at the time of his death, in order to find out what really happened.
+      </p>
+      <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--muted-gray); font-style: italic;">
+        A film about Europeans, filmed in Florida, in American Standard. A $2M USD union production.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== 4. DIRECTOR'S STATEMENT ========== -->
+  <div class="director-quote">
+    <blockquote>
+      <p>
+        "In FOR BURAZ it is my brother Tarik's sudden passing in 2010 that's a jumping point into a part of immigrant experience rarely explored — that of a child refugee chasing the American Dream. Set in the same Florida Bosnian refugee community my family landed in, this is a story of identity, the deep desire to belong (and yet feeling out of place everywhere), the gray zone in which good and bad reside, and guilt — themes that have haunted me most of my life, and all of my artistic career.
+      </p>
+      <p>
+        This struggle of a child refugee/immigrant is by no means unique to Bosnians. I believe all immigrant groups grapple with this phenomenon, and it's my goal to use this intimate, personal story to expose the universal truth of this experience."
+      </p>
+    </blockquote>
+    <cite>— Sabina Vajraca, Director / Writer</cite>
+  </div>
+
+  <div class="florida-break">
+    <img src="assets/images/florida-maroon.png" alt="" aria-hidden="true">
+  </div>
+
+  <!-- ========== 5. SIZZLE REEL ========== -->
+  <section class="sizzle">
+    <div class="container">
+      <span class="section-label">Sizzle Reel</span>
+      <div class="sizzle-wrapper">
+        <iframe
+          src="https://player.vimeo.com/video/sabinavajraca/forburazsizzle?title=0&byline=0&portrait=0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+          title="FOR BURAZ Sizzle Reel">
+        </iframe>
+      </div>
+      <p class="sizzle-caption">For Buraz — Sizzle Reel</p>
+    </div>
+  </section>
+
+  <div class="divider"><hr></div>
+
+  <!-- ========== 6. CAST ========== -->
+  <section>
+    <div class="container">
+      <span class="section-label">Attached Cast</span>
+      <h2>The Ensemble</h2>
+      <p>The cast combines US name recognition with authentic Balkan talent that will galvanize the diaspora audience — driving organic community screenings and word-of-mouth that no marketing budget can replicate.</p>
+
+      <div class="cast-grid">
+        <!-- Emile Hirsch -->
+        <div class="cast-card">
+          <div class="cast-photo"><span class="cast-initials">EH</span></div>
+          <div class="cast-info">
+            <p class="cast-name"><a href="https://www.imdb.com/name/nm0386472/" target="_blank" rel="noopener">Emile Hirsch</a></p>
+            <p class="cast-role">Kenan</p>
+            <p class="cast-credits">Into the Wild, Once Upon a Time in Hollywood, Milk, Lone Survivor, Speed Racer, Lords of Dogtown</p>
+          </div>
+        </div>
+        <!-- Julian Maroun -->
+        <div class="cast-card">
+          <div class="cast-photo"><span class="cast-initials">JM</span></div>
+          <div class="cast-info">
+            <p class="cast-name">Julian Maroun</p>
+            <p class="cast-role">Mirso</p>
+            <p class="cast-credits">Romper Stomper (STAN), Mr Inbetween (FX), The Correspondent (2026 AACTA nominee), Ladies in Black (ABC)</p>
+          </div>
+        </div>
+        <!-- Alma Prica -->
+        <div class="cast-card">
+          <div class="cast-photo"><span class="cast-initials">AP</span></div>
+          <div class="cast-info">
+            <p class="cast-name"><a href="https://www.imdb.com/name/nm0697340/" target="_blank" rel="noopener">Alma Prica</a></p>
+            <p class="cast-role">Indira</p>
+            <p class="cast-credits">2x Golden Arena (Croatian Oscar); Kontesa Dora, Witnesses (2004 Berlinale), Diary of Diana B., Halima's Path</p>
+          </div>
+        </div>
+        <!-- Faketa Salihbegovic -->
+        <div class="cast-card">
+          <div class="cast-photo"><span class="cast-initials">FS</span></div>
+          <div class="cast-info">
+            <p class="cast-name">Faketa Salihbegovic</p>
+            <p class="cast-role">Sejla</p>
+            <p class="cast-credits">Death in Sarajevo (Silver Bear, 2016 Berlinale), Full Moon (2020 European Film Awards nom.), I Know Your Soul (HBO)</p>
+          </div>
+        </div>
+        <!-- Flora Diaz -->
+        <div class="cast-card">
+          <div class="cast-photo"><span class="cast-initials">FD</span></div>
+          <div class="cast-info">
+            <p class="cast-name">Flora Diaz</p>
+            <p class="cast-role">Maya</p>
+            <p class="cast-credits">Roger Dodger, The Eyes of My Mother (2016 Sundance), CAM (Netflix/Blumhouse), Gotham (FOX), Never Here</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cinematographer -->
+      <div class="cinematographer">
+        <div class="cinematographer-icon"><span>UP</span></div>
+        <div class="cinematographer-info">
+          <h3><a href="https://www.imdb.com/name/nm1866498/" target="_blank" rel="noopener">Ula Pontikos</a></h3>
+          <p class="cast-role">Cinematographer</p>
+          <p>Renowned for intimate, naturalistic visual storytelling. Credits include Weekend, 45 Years (BAFTA-nominated), and extensive work in British independent cinema.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="florida-break">
+    <img src="assets/images/florida-navy.png" alt="" aria-hidden="true">
+  </div>
+
+  <!-- ========== 8. COMPARABLE FILMS ========== -->
+  <section>
+    <div class="container">
+      <span class="section-label">Proven Comparables</span>
+      <h2>Culturally specific stories that broke through</h2>
+      <p>Intimate stories rooted in specific immigrant experiences have achieved both critical acclaim and commercial success. These films share FOR BURAZ's profile: low budgets, diaspora audiences, festival launches, massive returns.</p>
+
+      <div class="comps-grid">
+        <!-- Anora -->
+        <div class="comp-card">
+          <p class="comp-title">Anora</p>
+          <p class="comp-meta">2024 &middot; Dir. Sean Baker &middot; Palme d'Or, Best Picture Oscar</p>
+          <div class="comp-stat">
+            <span class="comp-stat-label">Budget</span>
+            <span class="comp-stat-value">$6M</span>
+          </div>
+          <div class="comp-stat">
+            <span class="comp-stat-label">Worldwide Gross</span>
+            <span class="comp-stat-value highlight">$105M</span>
+          </div>
+          <div class="comp-stat">
+            <span class="comp-stat-label">ROI</span>
+            <span class="comp-stat-value">17.5x</span>
+          </div>
+          <div class="comp-stat">
+            <span class="comp-stat-label">Distributor</span>
+            <span class="comp-stat-value" style="color: var(--text-primary);">Neon</span>
+          </div>
+        </div>
+
+        <!-- Minari -->
+        <div class="comp-card">
+          <p class="comp-title">Minari</p>
+          <p class="comp-meta">2020 &middot; Dir. Lee Isaac Chung &middot; Sundance Grand Jury Prize, Oscar (Supporting Actress)</p>
+          <div class="comp-stat">
+            <span class="comp-stat-label">Budget</span>
+            <span class="comp-stat-value">$2M</span>
+          </div>
+          <div class="comp-stat">
+            <span class="comp-stat-label">Worldwide Gross</span>
+            <span class="comp-stat-value highlight">$15M</span>
+          </div>
+          <div class="comp-stat">
+            <span class="comp-stat-label">ROI</span>
+            <span class="comp-stat-value">7.5x</span>
+          </div>
+          <div class="comp-stat">
+            <span class="comp-stat-label">Distributor</span>
+            <span class="comp-stat-value" style="color: var(--text-primary);">A24</span>
+          </div>
+        </div>
+
+        <!-- The Farewell -->
+        <div class="comp-card">
+          <p class="comp-title">The Farewell</p>
+          <p class="comp-meta">2019 &middot; Dir. Lulu Wang &middot; Golden Globe (Best Actress)</p>
+          <div class="comp-stat">
+            <span class="comp-stat-label">Budget</span>
+            <span class="comp-stat-value">$3.5M</span>
+          </div>
+          <div class="comp-stat">
+            <span class="comp-stat-label">Worldwide Gross</span>
+            <span class="comp-stat-value highlight">$22.2M</span>
+          </div>
+          <div class="comp-stat">
+            <span class="comp-stat-label">ROI</span>
+            <span class="comp-stat-value">6.3x</span>
+          </div>
+          <div class="comp-stat">
+            <span class="comp-stat-label">Distributor</span>
+            <span class="comp-stat-value" style="color: var(--text-primary);">A24</span>
+          </div>
+        </div>
+      </div>
+      <p class="comps-source">Source: publicly reported box office data (Box Office Mojo, The Numbers). Figures approximate.</p>
+    </div>
+  </section>
+
+  <div class="divider"><hr></div>
+
+  <!-- ========== 9. THE OPPORTUNITY ========== -->
+  <section>
+    <div class="container">
+      <span class="section-label">The Opportunity</span>
+      <h2>A built-in global audience Hollywood has never served</h2>
+
+      <div class="stats-row">
+        <div class="stat">
+          <p class="stat-number">4M</p>
+          <p class="stat-label">Bosnians in Diaspora</p>
+        </div>
+        <div class="stat">
+          <p class="stat-number">2nd</p>
+          <p class="stat-label">Largest Diaspora (Relative)</p>
+        </div>
+        <div class="stat">
+          <p class="stat-number">20–30%</p>
+          <p class="stat-label">Of Intl. Revenue from Diaspora</p>
+        </div>
+      </div>
+
+      <p>
+        The Bosnian diaspora — spread across Germany, Austria, Sweden, the United States, Canada, Australia, and beyond — is a passionate, tightly connected global community with enormous purchasing power and deep cultural pride. It is the story of the people who moved from their home country, arrived in their new land, but their hearts have never left.
+      </p>
+      <p>
+        Diaspora territories (Germany/Austria, Scandinavia, Bosnia/Ex-Yugoslavia) represent an outsized share of revenue relative to market size. This is the film's unique structural advantage: a built-in, passionate audience that no comparable indie drama can claim.
+      </p>
+
+      <!-- Guild callout -->
+      <div class="guild-callout">
+        <h3>The For Buraz Guild</h3>
+        <p>
+          Inspired by the grassroots models that powered Sound of Freedom ($250M worldwide on a $14.5M budget) and The Passion of the Christ ($612M on $30M), FOR BURAZ is building a community-driven funding and distribution engine. The For Buraz Guild will allow diaspora members to invest, advocate, and organize — converting community pride into opening-weekend momentum.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 10. REVENUE PROJECTIONS ========== -->
+  <section>
+    <div class="container">
+      <span class="section-label">Revenue Projections</span>
+      <h2>Three Scenarios, One Structural Advantage</h2>
+      <p>Modeled across 13 international territories and 7 revenue channels. All figures represent total worldwide gross revenue.</p>
+
+      <table class="projections-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Basic</th>
+            <th>Good</th>
+            <th>Excellent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Festival Outcome</td>
+            <td>Limited release, 75–85% RT</td>
+            <td>Sundance selection, 88–94% RT</td>
+            <td>Major prize, 95%+ RT</td>
+          </tr>
+          <tr class="highlight-row">
+            <td>Total Gross Revenue</td>
+            <td>$0.6M – $1.8M</td>
+            <td>$2.6M – $7.9M</td>
+            <td>$8.4M – $27.8M</td>
+          </tr>
+          <tr>
+            <td>Foreign Pre-Sales (Floor)</td>
+            <td>$104K – $250K</td>
+            <td>$104K – $250K</td>
+            <td>$104K – $250K</td>
+          </tr>
+          <tr class="highlight-row">
+            <td>Est. Producer Net</td>
+            <td>$100K – $500K</td>
+            <td>$600K – $2.5M</td>
+            <td>$2.1M – $9.7M</td>
+          </tr>
+          <tr>
+            <td>Production Budget</td>
+            <td>$2M</td>
+            <td>$2M</td>
+            <td>$2M</td>
+          </tr>
+          <tr class="highlight-row">
+            <td>Est. ROI</td>
+            <td>Break-even risk</td>
+            <td>+40% to +167%</td>
+            <td>+140% to +547%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="projections-note">
+        Streaming and digital windows account for 55–65% of total revenue across all three scenarios. Theatrical is essential as the catalyst — it drives press, awards eligibility, SVOD license value, and PVOD pricing power — but the actual cash flows disproportionately through digital. This is the modern indie economic model.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider"><hr></div>
+
+  <!-- ========== 11. FINANCING ========== -->
+  <section>
+    <div class="container">
+      <span class="section-label">Financing Plan</span>
+      <h2>How FOR BURAZ Gets Made</h2>
+
+      <div class="financing-grid">
+        <div class="financing-item">
+          <h3>Foreign Pre-Sales</h3>
+          <p class="financing-amount">$104K – $250K</p>
+          <p>Guaranteed floor across Germany/Austria, Scandinavia, Bosnia, AU/NZ. Emile Hirsch provides minimum sales agent floor; Balkan cast adds pre-sale value in diaspora territories.</p>
+        </div>
+        <div class="financing-item">
+          <h3>Equity Investment</h3>
+          <p class="financing-amount">$800K – $1.2M</p>
+          <p>Private investors from the Bosnian diaspora business community, impact investors, and entertainment-focused funds.</p>
+        </div>
+        <div class="financing-item">
+          <h3>Grants &amp; Tax Incentives</h3>
+          <p class="financing-amount">$200K – $400K</p>
+          <p>Florida film incentive (transferable tax credits), potential co-production structures with Bosnia/Croatia/Australia for additional territorial incentives.</p>
+        </div>
+        <div class="financing-item">
+          <h3>Community Crowdfunding</h3>
+          <p class="financing-amount">For Buraz Guild</p>
+          <p>Community-driven funding allowing diaspora members to invest and become advocates — turning funders into the film's marketing engine.</p>
+        </div>
+        <div class="financing-total">
+          <h3>Total Production Budget</h3>
+          <p class="financing-amount">$2M USD</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="florida-break">
+    <img src="assets/images/florida-maroon.png" alt="" aria-hidden="true">
+  </div>
+
+  <!-- ========== 12. THE TEAM ========== -->
+  <section>
+    <div class="container">
+      <span class="section-label">The Team</span>
+      <h2>World-Class Filmmakers</h2>
+
+      <div class="team-grid">
+        <div class="team-member">
+          <h3>Sabina Vajraca</h3>
+          <span class="team-role">Director / Writer</span>
+          <p>Born in Bosnia and Herzegovina, Sabina immigrated to the U.S. as a war refugee and started her directing career in NYC theatre. Her feature documentary BACK TO BOSNIA premiered at AFI Fest, screened at 30+ festivals worldwide, and was featured in BBC's "Top 100 Greatest Films Directed by Women." Her short drama SEVAP/MITZVAH was a 2024 Academy Awards contender and won the 2023 Humanitas Prize. Her accolades include the DGA SFA Grand Prize, Alfred P. Sloan grant, and nominations for the Student Oscar and Student BAFTA. She is a member of Film Fatales and BAFTA, an alumna of Ryan Murphy's Half Directing Mentorship and Stowe Story Labs, and holds an M.F.A. from USC School of Cinematic Arts.</p>
+        </div>
+        <div class="team-member">
+          <h3>Diane Houslin</h3>
+          <span class="team-role">Producer</span>
+          <p>Diane's credits include ESPN documentaries THROUGH THE FIRE and LAY IT ON THE LINE; short film MORNING BREATH (Sundance Special Jury Prize); Apple+ limited series THE LAST DAYS OF PTOLEMY GRAY starring Samuel L. Jackson; Sundance-supported feature YELLING TO THE SKY starring Zoe Kravitz; and Disney/Hulu feature THE MAN IN MY BASEMENT starring Corey Hawkins and Willem Dafoe (2025 TIFF Premiere, 2026 BAFTA Nominee). She is an inaugural class fellow of the Sundance Institute Creative Producers Lab.</p>
+        </div>
+        <div class="team-member">
+          <h3>Paul Miller</h3>
+          <span class="team-role">Executive Producer</span>
+          <p>Paul has produced and financed films globally, running film funds in both the U.S. and the Middle East. His films have premiered at Cannes, Berlin, Venice, Sundance, and Toronto, and include David Gordon Green's SNOW ANGELS, PROZAC NATION, the Oscar-nominated LONE STAR, and SCALES (Venice Film Festival Verona Award, Saudi Oscar submission). He is a member of the DGA, PGA, ACE Producers, and the European Film Academy.</p>
+        </div>
+        <div class="team-member">
+          <h3>Tea Nicola</h3>
+          <span class="team-role">Executive Producer</span>
+          <p>Tea immigrated to Canada as a Bosnian War refugee and was raised by a single mom. She founded WealthBar Financial Services, Canada's first exclusively online wealth manager, and served as CEO for a decade before selling to CI Financial Services in 2019. She has been recognized as "Business in Vancouver Top 40 under 40," "Most Influential Women in Business," and "Top 500 BC Business Leaders of All Time." She was involved in the Oscar campaign for SEVAP/MITZVAH.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><hr></div>
+
+  <!-- ========== 13. ACCOLADES / WHY NOW ========== -->
+  <section>
+    <div class="container">
+      <span class="section-label">Why This Film. Why Now.</span>
+      <h2>The immigrant experience is the defining story of our time.</h2>
+      <p>
+        From Sundance breakouts to Oscar winners, audiences and the industry have demonstrated an insatiable appetite for authentic, culturally specific stories told by filmmakers from within those communities. Films like Anora, Minari, The Farewell, and A Separation have proven that intimate stories rooted in specific immigrant experiences can achieve both critical acclaim and commercial success.
+      </p>
+      <p>
+        FOR BURAZ occupies a unique space in this landscape. It is not simply an "immigrant story" — it is a crime drama, a mystery, a family tragedy, and a character study, all wrapped in a world audiences have never seen on screen. The Bosnian-American community in Florida is vivid, colorful, heartbreaking, and funny in ways that feel genuinely new.
+      </p>
+      <p>
+        With Emile Hirsch attached, a world-class producing team, and the backing of a 4-million-strong global diaspora, FOR BURAZ is positioned to be one of the most compelling independent films of its release year — and a landmark moment for a community that has been waiting decades to see its story told on screen.
+      </p>
+
+      <div class="accolades">
+        <span class="accolade">FEST Pitching Forum Winner (2021)</span>
+        <span class="accolade">Tangerine Fellowship, Stowe Story Labs (2019)</span>
+        <span class="accolade">Top 100, Capital Funds Screenplay Competition (2022)</span>
+        <span class="accolade">Austin Film Festival Second Rounder (2018)</span>
+        <span class="accolade">Nantucket Screenwriters Colony (2019)</span>
+        <span class="accolade">Lynn Shelton's Of a Certain Age Grant Finalist (2021)</span>
+        <span class="accolade">LANDO Grant Finalist (2024)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 14. CTA ========== -->
+  <section class="cta">
+    <div class="container">
+      <h2>Be Part of the Story</h2>
+      <p>FOR BURAZ is assembling its financing now. We're looking for investors who believe in the power of untold stories and underserved audiences.</p>
+
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-primary">Investment Inquiry</a>
+        <a href="#" class="btn btn-secondary">Join the For Buraz Guild</a>
+      </div>
+
+      <div class="cta-contact">
+        <p><strong>Chris Bellant</strong> // Vision Entertainment</p>
+        <p><a href="mailto:Chris@vision-la.com">Chris@vision-la.com</a> &nbsp;|&nbsp; 212-844-9033</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 15. FOOTER ========== -->
+  <footer>
+    <p>Confidential &middot; For Buraz &middot; 2026</p>
+  </footer>
+
+</body>
+</html>
