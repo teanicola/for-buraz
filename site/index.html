@@ -333,14 +333,16 @@
        ============================================ */
     .story {
       position: relative;
-      background: url('assets/images/story-bg.jpg') center bottom / cover no-repeat;
+      background: #f5f3ef;
+      overflow: hidden;
     }
 
     .story::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(255, 255, 255, 0.93);
+      background: url('assets/images/story-bg.jpg') center center / cover no-repeat;
+      opacity: 0.6;
       pointer-events: none;
     }
 
@@ -367,7 +369,7 @@
        ============================================ */
     .director-quote {
       padding: 3rem 2rem 3rem 3rem;
-      margin: 0 auto;
+      margin: 20px auto 0;
       max-width: 960px;
       background: linear-gradient(165deg, rgba(27, 35, 64, 0.2) 0%, transparent 50%);
       position: relative;
