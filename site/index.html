@@ -331,9 +331,35 @@
     /* ============================================
        3. STORY
        ============================================ */
+    .story {
+      position: relative;
+      background: url('assets/images/story-bg.jpg') center bottom / cover no-repeat;
+    }
+
+    .story::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.93);
+      pointer-events: none;
+    }
+
+    .story .container {
+      position: relative;
+    }
+
+    .story .section-label {
+      color: var(--deep-sepia);
+    }
+
+    .story h2 {
+      color: #1A1008;
+    }
+
     .story p {
       font-size: 1.1rem;
       line-height: 1.85;
+      color: #1A1008;
     }
 
     /* ============================================
