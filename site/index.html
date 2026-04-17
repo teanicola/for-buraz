@@ -448,16 +448,32 @@
        ============================================ */
     .cast-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(6, 1fr);
       gap: 1.5rem;
       margin-top: 2rem;
     }
 
+    .cast-grid .cast-card {
+      grid-column: span 2;
+    }
+
+    .cast-grid .cast-card:nth-child(4) {
+      grid-column: 2 / 4;
+    }
+
+    .cast-grid .cast-card:nth-child(5) {
+      grid-column: 4 / 6;
+    }
+
     .cast-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
       background: var(--venetian-shadow);
       border: 1px solid var(--border-subtle);
       overflow: hidden;
       transition: border-color 0.3s, transform 0.3s;
+      cursor: pointer;
     }
 
     .cast-card:hover {
@@ -1018,6 +1034,12 @@
         gap: 1rem;
       }
 
+      .cast-grid .cast-card,
+      .cast-grid .cast-card:nth-child(4),
+      .cast-grid .cast-card:nth-child(5) {
+        grid-column: span 1;
+      }
+
       .cast-photo {
         aspect-ratio: 1 / 1;
       }
@@ -1187,50 +1209,50 @@
 
       <div class="cast-grid reveal-stagger">
         <!-- Emile Hirsch -->
-        <div class="cast-card reveal">
+        <a href="https://www.imdb.com/name/nm0386472/?ref_=ext_shr_lnk" target="_blank" rel="noopener" class="cast-card reveal">
           <div class="cast-photo"><img src="assets/images/cast/emile-hirsch.jpg" alt="Emile Hirsch"></div>
           <div class="cast-info">
-            <p class="cast-name"><a href="https://www.imdb.com/name/nm0386472/" target="_blank" rel="noopener">Emile Hirsch</a></p>
+            <p class="cast-name">Emile Hirsch</p>
             <p class="cast-role">Kenan</p>
             <p class="cast-credits">Into the Wild, Once Upon a Time in Hollywood, Milk, Lone Survivor, Speed Racer, Lords of Dogtown</p>
           </div>
-        </div>
+        </a>
         <!-- Julian Maroun -->
-        <div class="cast-card reveal">
+        <a href="https://www.imdb.com/name/nm6940456/?ref_=ext_shr_lnk" target="_blank" rel="noopener" class="cast-card reveal">
           <div class="cast-photo"><img src="assets/images/cast/julian-maroun.jpg" alt="Julian Maroun"></div>
           <div class="cast-info">
-            <p class="cast-name"><a href="https://www.imdb.com/name/nm6940456/" target="_blank" rel="noopener">Julian Maroun</a></p>
+            <p class="cast-name">Julian Maroun</p>
             <p class="cast-role">Mirso</p>
             <p class="cast-credits">Romper Stomper (STAN), Mr Inbetween (FX), The Correspondent (2026 AACTA nominee), Ladies in Black (ABC)</p>
           </div>
-        </div>
+        </a>
         <!-- Alma Prica -->
-        <div class="cast-card reveal">
+        <a href="https://www.imdb.com/name/nm0696761/?ref_=ext_shr_lnk" target="_blank" rel="noopener" class="cast-card reveal">
           <div class="cast-photo"><img src="assets/images/cast/alma-prica.jpg" alt="Alma Prica"></div>
           <div class="cast-info">
-            <p class="cast-name"><a href="https://www.imdb.com/name/nm0697340/" target="_blank" rel="noopener">Alma Prica</a></p>
+            <p class="cast-name">Alma Prica</p>
             <p class="cast-role">Indira</p>
             <p class="cast-credits">2x Golden Arena (Croatian Oscar); Kontesa Dora, Witnesses (2004 Berlinale), Diary of Diana B., Halima's Path</p>
           </div>
-        </div>
+        </a>
         <!-- Faketa Salihbegovic -->
-        <div class="cast-card reveal">
+        <a href="https://www.imdb.com/name/nm1566650/?ref_=ext_shr_lnk" target="_blank" rel="noopener" class="cast-card reveal">
           <div class="cast-photo"><img src="assets/images/cast/faketa-salihbegovic.jpg" alt="Faketa Salihbegovic"></div>
           <div class="cast-info">
-            <p class="cast-name"><a href="https://www.imdb.com/name/nm3917599/" target="_blank" rel="noopener">Faketa Salihbegovic</a></p>
+            <p class="cast-name">Faketa Salihbegovic</p>
             <p class="cast-role">Sejla</p>
             <p class="cast-credits">Death in Sarajevo (Silver Bear, 2016 Berlinale), Full Moon (2020 European Film Awards nom.), I Know Your Soul (HBO)</p>
           </div>
-        </div>
+        </a>
         <!-- Flora Diaz -->
-        <div class="cast-card reveal">
+        <a href="https://www.imdb.com/name/nm1265612/?ref_=ext_shr_lnk" target="_blank" rel="noopener" class="cast-card reveal">
           <div class="cast-photo"><img src="assets/images/cast/flora-diaz.jpg" alt="Flora Diaz"></div>
           <div class="cast-info">
-            <p class="cast-name"><a href="https://www.imdb.com/name/nm1033193/" target="_blank" rel="noopener">Flora Diaz</a></p>
+            <p class="cast-name">Flora Diaz</p>
             <p class="cast-role">Maya</p>
             <p class="cast-credits">Roger Dodger, The Eyes of My Mother (2016 Sundance), CAM (Netflix/Blumhouse), Gotham (FOX), Never Here</p>
           </div>
-        </div>
+        </a>
       </div>
 
       <!-- Cinematographer -->
